@@ -1,0 +1,61 @@
+.task-list {
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.task-item {
+  background: color-mix(in srgb, var(--gray-900) 5%, transparent);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.task-item h3 {
+  color: var(--gray-900);
+  margin: 0 0 0.5rem 0;
+}
+
+.task-item p {
+  color: var(--gray-700);
+  margin-bottom: 0.5rem;
+}
+
+.task-meta {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background: color-mix(in srgb, var(--hot-red) 15%, transparent);
+  color: var(--hot-red);
+}
+
+.status-badge.in-progress {
+  background: color-mix(in srgb, var(--orange) 15%, transparent);
+  color: var(--orange);
+}
+
+.status-badge.completed {
+  background: color-mix(in srgb, var(--bright-blue) 15%, transparent);
+  color: var(--bright-blue);
+}
+
+.due-date {
+  color: var(--gray-400);
+  font-size: 0.875rem;
+}
+
+.no-tasks {
+  color: var(--gray-400);
+  text-align: center;
+  padding: 2rem;
+}
