@@ -7,14 +7,18 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
+import com.springdemo.helloworld2.entity.Task;
+import com.springdemo.helloworld2.repository.TaskRepository;
 
 @SpringBootApplication
 public class MainApplication implements CommandLineRunner {
 
     private final DataSource dataSource;
+    private final TaskRepository taskRepository;
 
-    public MainApplication(DataSource dataSource) {
+    public MainApplication(DataSource dataSource, TaskRepository taskRepository) {
         this.dataSource = dataSource;
+        this.taskRepository = taskRepository;
     }
 
     public static void main(String[] args) {
@@ -32,6 +36,11 @@ public class MainApplication implements CommandLineRunner {
                 String tableName = tables.getString("TABLE_NAME");
                 System.out.println("- " + tableName);
             }
+        }
+
+        System.out.println("\nTasks in database:");
+        for (Task task : taskRepository.findAll()) {
+            System.out.println("- " + task.getTitle() + " (ID: " + task.getId() + ")");
         }
     }
 }
