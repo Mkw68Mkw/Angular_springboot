@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../services/task.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -14,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatDialogModule]
 })
-export class CreateTaskComponent {
+export class CreateTaskComponent implements OnInit {
   taskForm: FormGroup;
 
   constructor(
@@ -31,14 +31,31 @@ export class CreateTaskComponent {
     });
   }
 
+  ngOnInit() {
+    if(this.data?.task) {
+      this.taskForm.patchValue({
+        ...this.data.task,
+        dueDate: this.formatDate(this.data.task.dueDate)
+      });
+    }
+  }
+
+  private formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return date.toISOString().split('T')[0];
+  }
+
   onSubmit() {
     if (this.taskForm.valid) {
-      this.taskService.createTask(this.taskForm.value).subscribe({
-        next: () => {
-          this.dialogRef.close(true);
-          window.location.reload();
+      const operation = this.data?.task 
+        ? this.taskService.updateTask(this.data.task.id, this.taskForm.value)
+        : this.taskService.createTask(this.taskForm.value);
+
+      operation.subscribe({
+        next: (result) => {
+          this.dialogRef.close(result || true);
         },
-        error: (err) => console.error('Error creating task:', err)
+        error: (err) => console.error('Error:', err)
       });
     }
   }

@@ -27,12 +27,20 @@
               {{ task.status | titlecase }}
             </span>
             <span class="due-date">{{ task.dueDate | date }}</span>
-            <button mat-icon-button 
-                    (click)="deleteTask(task.id)"
-                    aria-label="Delete task"
-                    class="delete-button">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <div class="action-buttons">
+              <button mat-icon-button 
+                      (click)="openEditDialog(task)"
+                      aria-label="Edit task"
+                      class="edit-button">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button 
+                      (click)="deleteTask(task.id)"
+                      aria-label="Delete task"
+                      class="delete-button">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
         </div>
       </div>
