@@ -34,7 +34,10 @@ export class CreateTaskComponent {
   onSubmit() {
     if (this.taskForm.valid) {
       this.taskService.createTask(this.taskForm.value).subscribe({
-        next: () => this.dialogRef.close(true),
+        next: () => {
+          this.dialogRef.close(true);
+          window.location.reload();
+        },
         error: (err) => console.error('Error creating task:', err)
       });
     }
