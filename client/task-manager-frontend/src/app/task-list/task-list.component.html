@@ -27,6 +27,12 @@
               {{ task.status | titlecase }}
             </span>
             <span class="due-date">{{ task.dueDate | date }}</span>
+            <button mat-icon-button 
+                    (click)="deleteTask(task.id)"
+                    aria-label="Delete task"
+                    class="delete-button">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
       </div>
