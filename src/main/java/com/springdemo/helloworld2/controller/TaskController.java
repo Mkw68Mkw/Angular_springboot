@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,11 @@ public class TaskController {
 
     @PostMapping("/tasks")
     public Task createTask(@RequestBody Task task) {
+        task.setCreatedAt(LocalDateTime.now());
+        task.setUpdatedAt(LocalDateTime.now());
+        if(task.getStatus() == null) {
+            task.setStatus(Task.Status.pending);
+        }
         return taskRepository.save(task);
     }
 

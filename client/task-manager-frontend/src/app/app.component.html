@@ -7,5 +7,15 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
+<div class="container">
+  <h1>Aufgabenverwaltung</h1>
+  
+  <button mat-fab color="primary" (click)="openCreateDialog()" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <router-outlet></router-outlet>
+  
+  <!-- Existierende Task-Liste... -->
+</div>
 
