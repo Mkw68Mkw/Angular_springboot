@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TaskService } from './services/task.service';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from './create-task/create-task.component';
 import { MatIconModule } from '@angular/material/icon';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,13 @@ export class AppComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      // Browser-only code
+    }
+  }
 
   ngOnInit() {
     this.loadTasks();

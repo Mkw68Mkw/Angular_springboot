@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod --output-path=dist/browser",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:task-manager-frontend": "node dist/task-manager-frontend/server/server.mjs"
+    "serve:ssr:task-manager-frontend": "node dist/task-manager-frontend/server/server.mjs",
+    "postbuild": "cp vercel.json dist/browser/"
   },
   "private": true,
   "dependencies": {
