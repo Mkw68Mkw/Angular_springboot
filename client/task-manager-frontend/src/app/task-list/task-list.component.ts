@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateTaskComponent } from '../create-task/create-task.component';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-task-list',
@@ -17,7 +18,8 @@ import { CreateTaskComponent } from '../create-task/create-task.component';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   title = 'Task List';
   tasks: any[] = [];
 
@@ -28,6 +30,16 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     this.loadTasks();
+    
+    // Auf Refresh-Events reagieren
+    this.taskService.refresh
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.loadTasks());
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   loadTasks() {

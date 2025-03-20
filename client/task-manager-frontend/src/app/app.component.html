@@ -8,14 +8,23 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 <div class="container">
-  <h1>Aufgabenverwaltung</h1>
-  
-  <button mat-fab color="primary" (click)="openCreateDialog()" class="add-button">
+  <header class="app-header">
+    <h1>SpringTasks</h1>
+    <h2>Task-Management powered by Java & Angular</h2>
+  </header>
+
+  <button mat-fab color="primary" (click)="openCreateDialog()" class="add-button" aria-label="Neue Aufgabe erstellen">
     <mat-icon>add</mat-icon>
   </button>
-
   <router-outlet></router-outlet>
   
   <!-- Existierende Task-Liste... -->
+
+  <footer class="app-footer">
+    <div class="footer-content">
+      <p>&copy; {{ currentYear }} SpringTasks - Entwickelt von Kevin Wu</p>
+      <p>Powered by Spring Boot & Angular</p>
+    </div>
+  </footer>
 </div>
 

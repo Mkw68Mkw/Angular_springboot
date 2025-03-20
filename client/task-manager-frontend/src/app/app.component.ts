@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class AppComponent implements OnInit {
   title = 'task-manager-frontend';
   tasks: any[] = [];
+  currentYear = new Date().getFullYear();
 
   constructor(
     private taskService: TaskService,

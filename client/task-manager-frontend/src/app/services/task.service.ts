@@ -1,14 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
   private apiUrl = '/api/tasks';
+  private http = inject(HttpClient);
+  private refresh$ = new Subject<void>();
 
-  constructor(private http: HttpClient) { }
+  // Neues Observable für Refresh-Events
+  get refresh() {
+    return this.refresh$.asObservable();
+  }
 
   getAllTasks(): Observable<any> {
     return this.http.get(this.apiUrl);
@@ -19,14 +25,20 @@ export class TaskService {
   }
 
   createTask(task: any): Observable<any> {
-    return this.http.post(this.apiUrl, task);
+    return this.http.post(this.apiUrl, task).pipe(
+      tap(() => this.refresh$.next())
+    );
   }
 
   updateTask(id: number, task: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, task);
+    return this.http.put(`${this.apiUrl}/${id}`, task).pipe(
+      tap(() => this.refresh$.next())
+    );
   }
 
   deleteTask(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`).pipe(
+      tap(() => this.refresh$.next())
+    );
   }
 } 
