@@ -2,12 +2,13 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { environment } from '../..//environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = '/api/tasks';
+  private apiUrl = environment.apiUrl + '/tasks';
   private http = inject(HttpClient);
   private refresh$ = new Subject<void>();
 
