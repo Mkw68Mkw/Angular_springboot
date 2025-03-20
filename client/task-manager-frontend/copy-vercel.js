@@ -1,4 +1,6 @@
 const fs = require('fs-extra');
 
-fs.copySync('vercel.json', 'dist/task-manager-frontend/vercel.json');
-console.log('Copied vercel.json to build directory!');
+// Copy both vercel config and the built assets to correct location
+fs.copySync('vercel.json', 'dist/client/vercel.json');
+fs.copySync('dist/client', '../client/src/main/resources/static');
+console.log('Copied files to Spring Boot static resources!');
