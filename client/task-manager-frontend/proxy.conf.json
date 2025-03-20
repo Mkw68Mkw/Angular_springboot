@@ -1,6 +1,12 @@
 {
     "/api": {
-      "target": "http://localhost:8080",
-      "secure": false
+      "target": "http://springtaskmanager-env-1.eba-qakmp93r.eu-north-1.elasticbeanstalk.com",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true,
+      "headers": {
+        "Host": "springtaskmanager-env-1.eba-qakmp93r.eu-north-1.elasticbeanstalk.com",
+        "X-Forwarded-Proto": "http"
+      }
     }
   }
