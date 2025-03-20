@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   loadTasks() {
     this.taskService.getAllTasks().subscribe({
       next: (tasks) => this.tasks = tasks,
-      error: (err) => console.error('Error loading tasks:', err)
+      error: (err) => console.error('Error loading taskss:', err)
     });
   }
 
