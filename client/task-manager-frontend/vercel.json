@@ -5,6 +5,12 @@
         "use": "@vercel/static-build"
       }
     ],
-    "outputDirectory": "dist/task-manager-frontend/browser"
+    "outputDirectory": "dist/task-manager-frontend/browser",
+    "routes": [
+      {
+        "src": "/.*",
+        "dest": "/index.html"
+      }
+    ]
   }
   

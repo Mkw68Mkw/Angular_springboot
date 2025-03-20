@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --configuration production --output-path=dist/task-manager-frontend",
+    "build": "ng build --configuration production --output-path dist/task-manager-frontend --base-href /",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:task-manager-frontend": "node dist/task-manager-frontend/server/server.mjs",
